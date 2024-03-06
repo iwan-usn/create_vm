@@ -1,0 +1,40 @@
+---
+- name: Deploys a vm based on
+  hosts: 'localhost'
+  gather_facts: yes
+  become: yes
+  vars_prompt:
+    - name: name
+      prompt: "What's the hostname [default]"
+      default: 'default'
+      private: no
+    - name: ram_mb
+      prompt: "How much memory (4 or 8) [4GB]"
+      default: '4096'
+      private: no
+    - name: vcpus
+      prompt: "How many cores [2]"
+      default: '2'
+      private: no
+    - name: distro
+      prompt: "Which distro? (fedora/deb)[deb]"
+      default: 'deb'
+      private: no
+  vars_files:
+      - roles/common/vars/main.yml
+    
+
+  tasks:
+    - name: 'KVM Provision role'
+      include_role:
+        name: kvm_provision
+      vars:
+        vm_distro: "{{ distro }}"
+        libvirt_pool_dir: "{{ libvirt_pool_dir }}"
+        vm_name: "{{ name }}"
+        vm_vcpus: "{{ vcpus }}"
+        vm_ram_mb: "{{ ram_mb }}"
+        vm_net: "{{ net }}"
+        cleanup_tmp: "{{ cleanup }}"
+        vm_password: "{{ password }}"
+ #       ssh_key: "{{ ssh_key }}"  #   --ssh-inject 'root:file:{{ ssh_key }}' \

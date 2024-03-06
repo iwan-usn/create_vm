@@ -1,0 +1,14 @@
+---
+- name: test
+  hosts: localhost
+  gather_facts: yes
+  tasks:
+    - name: task
+      community.libvirt.virt:
+        name: test
+        command: info
+      register: ananas
+
+    - name: test
+      ansible.builtin.debug:
+        msg: "{{ ananas }}"
