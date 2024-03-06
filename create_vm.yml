@@ -4,7 +4,7 @@
   gather_facts: yes
   become: yes
   vars_prompt:
-    - name: name
+    - name: hstname
       prompt: "What's the hostname [default]"
       default: 'default'
       private: no
@@ -31,7 +31,7 @@
       vars:
         vm_distro: "{{ distro }}"
         libvirt_pool_dir: "{{ libvirt_pool_dir }}"
-        vm_name: "{{ name }}"
+        vm_name: "{{ hstname }}"
         vm_vcpus: "{{ vcpus }}"
         vm_ram_mb: "{{ ram_mb }}"
         vm_net: "{{ net }}"

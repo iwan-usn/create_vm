@@ -21,7 +21,7 @@
   command: |
     virt-customize -a {{ libvirt_pools_dir }}/{{ vm_name }}.qcow2 \
     --hostname {{ vm_name }} \
-    --root-password password:{{ vm_password }}! \
+    --root-password password:{{ vm_password }} \
     --uninstall cloud-init --selinux-relabel
 
 - name: Define vm
