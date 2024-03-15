@@ -17,8 +17,8 @@
       default: '2'
       private: no
     - name: distro
-      prompt: "Which distro? (fedora/deb)[deb]"
-      default: 'deb'
+      prompt: "Which distro? (rhel9/deb(11/12))[deb]"
+      default: 'deb12'
       private: no
   vars_files:
       - roles/common/vars/main.yml

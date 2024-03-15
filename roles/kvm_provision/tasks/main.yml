@@ -1,21 +1,30 @@
 ---
-- name: 'Copy debian qcow to VM lib'
+- name: 'Copy debian 12 qcow to VM lib'
   copy:
     src: "{{ item }}"
     dest: "{{ libvirt_pools_dir }}/{{ vm_name }}.qcow2"
   with_fileglob:
-    - "/home/iwanvandepaverd/images/debian*"
+    - "/home/iwanvandepaverd/images/debian12*"
   register: copy_results
-  when: vm_distro == "deb"
+  when: vm_distro == "deb12"
 
-- name: 'Copy fedora qcow to VM lib'
+- name: 'Copy debian 11 qcow to VM lib'
   copy:
     src: "{{ item }}"
     dest: "{{ libvirt_pools_dir }}/{{ vm_name }}.qcow2"
   with_fileglob:
-    - "/home/iwanvandepaverd/images/fedora*"
+    - "/home/iwanvandepaverd/images/debian11*"
   register: copy_results
-  when: vm_distro == "fedora"
+  when: vm_distro == "deb11"
+
+- name: 'Copy rhel 9 qcow to VM lib'
+  copy:
+    src: "{{ item }}"
+    dest: "{{ libvirt_pools_dir }}/{{ vm_name }}.qcow2"
+  with_fileglob:
+    - "/home/iwanvandepaverd/images/rhel9*"
+  register: copy_results
+  when: vm_distro == "rhel9"
 
 - name: 'Configure the image'
   command: |
